@@ -98,3 +98,37 @@ h1 {
     color: #dd5;
   }
 }
+
+/* Table header styles */
+table.rwd-table th {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Sort icon styles */
+table.rwd-table th::after {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px;
+  border-color: transparent transparent #f7f2f2;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+
+/* Sort icon for ascending order */
+table.rwd-table th.ascending::after {
+  border-color: #f3eeee transparent transparent;
+}
+
+/* Sort icon for descending order */
+table.rwd-table th.descending::after {
+  border-color: transparent transparent #b5a9a9;
+}
+

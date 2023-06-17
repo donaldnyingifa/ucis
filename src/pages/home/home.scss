@@ -4,7 +4,11 @@
   .about {
     padding: 20px;
     .mandate {
+      min-width: 300px;
       padding: 20px;
+    }
+    .frame {
+      min-width: 300px;
     }
   } 
 }

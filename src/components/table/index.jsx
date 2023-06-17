@@ -1,38 +1,130 @@
-import React from "react";
+import React, { useState } from "react";
+import { TextField, Button } from "@mui/material";
 import "./table.scss";
 
-function Table() {
-    return (
-        <>
-            <h1>RWD List to Table</h1>
-            <table class='rwd-table'>
-                <tr>
-                    <th>Movie Title</th>
-                    <th>Genre</th>
-                    <th>Year</th>
-                    <th>Gross</th>
-                </tr>
-                <tr>
-                    <td data-th='Movie Title'>Star Wars</td>
-                    <td data-th='Genre'>Adventure, Sci-fi</td>
-                    <td data-th='Year'>1977</td>
-                    <td data-th='Gross'>$460,935,665</td>
-                </tr>
-                <tr>
-                    <td data-th='Movie Title'>Howard The Duck</td>
-                    <td data-th='Genre'>"Comedy"</td>
-                    <td data-th='Year'>1986</td>
-                    <td data-th='Gross'>$16,295,774</td>
-                </tr>
-                <tr>
-                    <td data-th='Movie Title'>American Graffiti</td>
-                    <td data-th='Genre'>Comedy, Drama</td>
-                    <td data-th='Year'>1973</td>
-                    <td data-th='Gross'>$115,000,000</td>
-                </tr>
-            </table>
-        </>
-    );
-}
+function calculateAge(dateOfBirth) {
+    const dob = new Date(dateOfBirth);
+    const currentDate = new Date();
+  
+    let age = currentDate.getFullYear() - dob.getFullYear();
+  
+    const monthDiff = currentDate.getMonth() - dob.getMonth();
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && currentDate.getDate() < dob.getDate())
+    ) {
+      age--;
+    }
+  
+    return age;
+  }
 
-export default Table;
+  function Table({ data, searchName }) {
+    const [searchValue, setSearchValue] = useState("");
+    const [sortConfig, setSortConfig] = useState({ key: null, direction: "" });
+  
+    const handleChange = (event) => {
+      const value = event.target.value;
+      setSearchValue(value);
+      searchName(value);
+    };
+  
+    const handleSort = (key) => {
+      let direction = "ascending";
+      if (sortConfig && sortConfig.key === key && sortConfig.direction === "ascending") {
+        direction = "descending";
+      }
+      setSortConfig({ key, direction });
+    };
+  
+    const sortedData = [...data]; // Create a new array to avoid mutating the original data
+  
+    if (sortConfig.key) {
+      sortedData.sort((a, b) => {
+        const valueA = a[sortConfig.key];
+        const valueB = b[sortConfig.key];
+  
+        if (valueA < valueB) {
+          return sortConfig.direction === "ascending" ? -1 : 1;
+        }
+        if (valueA > valueB) {
+          return sortConfig.direction === "ascending" ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+  
+    return (
+      <>
+        <h1>Registered Users</h1>
+  
+        <div className="center-div">
+          <TextField
+            id="text"
+            type="text"
+            label="Search Name"
+            variant="standard"
+            value={searchValue}
+            onChange={handleChange}
+          />
+        </div>
+  
+        <table className="rwd-table">
+          <thead>
+            <tr>
+              <th
+                onClick={() => handleSort("name")}
+                className={sortConfig.key === "name" ? `sorted ${sortConfig.direction}` : ""}
+              >
+                Name
+              </th>
+              <th
+                onClick={() => handleSort("gender")}
+                className={sortConfig.key === "gender" ? `sorted ${sortConfig.direction}` : ""}
+              >
+                Gender
+              </th>
+              <th
+                onClick={() => handleSort("dob")}
+                className={sortConfig.key === "dob" ? `sorted ${sortConfig.direction}` : ""}
+              >
+                Age
+              </th>
+              <th
+                onClick={() => handleSort("income")}
+                className={sortConfig.key === "income" ? `sorted ${sortConfig.direction}` : ""}
+              >
+                Income
+              </th>
+            </tr>
+          </thead>
+          {sortedData.length > 0 && (
+            <tbody>
+              {sortedData.map((person, index) => (
+                <tr key={index}>
+                  <td data-th="Name">{person.name}</td>
+                  <td data-th="Gender">{person.gender}</td>
+                  <td data-th="Age">{calculateAge(person.dob)}</td>
+                  <td data-th="Income">{person.income}</td>
+                  <td>
+                    <Button
+                      className="view-button"
+                      style={{
+                        backgroundColor: "grey",
+                        borderColor: "grey",
+                        color: "#fff",
+                      }}
+                    >
+                      View
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          )}
+        </table>
+      </>
+    );
+  }
+  
+  export default Table;

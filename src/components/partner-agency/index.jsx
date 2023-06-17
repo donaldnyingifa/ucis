@@ -8,7 +8,7 @@ function PartnerAgency() {
     <>
     <div className='partner'>
       <h5>PartnerAgencies</h5>
-      <Image src={P1} />
+      <Image src={P1} width="80%" />
     </div>
 
    

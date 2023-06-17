@@ -13,20 +13,21 @@ function Header() {
       <Container>
         <Navbar.Brand href="#">
           <Link to="/">
-            <Image src={logo} width="400px" />
+            <Image src={logo} width="350px" />
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <ul className='header'>
-            <li><Link to="/entertainer">
+            <Nav>
+            <li><Link to="/login">
             STAFF LOGIN
             </Link></li>
 
             <li><Link to="/faq">
             FAQ
             </Link></li>
-
+            </Nav>
           </ul>
 
         </Navbar.Collapse>

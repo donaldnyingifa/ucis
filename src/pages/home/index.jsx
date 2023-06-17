@@ -27,25 +27,34 @@ function Home() {
                     <img className='d-block w-100' src={Slider3} alt='Third slide' />
                 </Carousel.Item>
             </Carousel>
-            <Row className="about">
+            <Row className='about'>
                 <Col>
-                <div className="mandate">
-                <h4>The Mandate</h4>
-                    <p>
-                        Welcome to the official Web site of the National Identity Management
-                        Commission [NIMC]. Established by the NIMC Act No. 23 of 2007, the NIMC has
-                        the mandate to establish, own, operate, maintain and manage the National
-                        Identity Database in Nigeria, register persons covered by the Act, assign a
-                        Unique National Identification Number (NIN) and issue General Multi-Purpose
-                        Cards (GMPC) to those.
-                    </p>
-                </div>
-                    
+                    <div className='mandate'>
+                        <h4>The Mandate</h4>
+                        <p>
+                            Welcome to the official Web site of the National Identity Management
+                            Commission [NIMC]. Established by the NIMC Act No. 23 of 2007, the NIMC
+                            has the mandate to establish, own, operate, maintain and manage the
+                            National Identity Database in Nigeria, register persons covered by the
+                            Act, assign a Unique National Identification Number (NIN) and issue
+                            General Multi-Purpose Cards (GMPC) to those.
+                        </p>
+                        <p>
+                            The NIMC Act 2007 provides for the establishment of the NIMC, its
+                            functions, powers, establishment of the National Identity Database,
+                            assignment of the National Identification Number (NIN) as well as
+                            issuance of token General Multi-purpose cards. The Act also provides the
+                            Commission with powers to make regulations connected with its functions.
+                            The NIMC Act 2007 provides the repeal of the law that created the former
+                            Department of National Civic Registration (DNCR) and the transfer of its
+                            assets and liabilities to the NIMC.
+                        </p>
+                    </div>
                 </Col>
 
-                <Col>
+                <Col className='frame'>
                     <iframe
-                        width='560'
+                        width='90%'
                         height='315'
                         src='https://www.youtube.com/embed/XObCtsdMhGc'
                         title='YouTube video player'

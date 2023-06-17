@@ -1,13 +1,23 @@
 {
   "files": {
-    "main.css": "/static/css/main.bac16d7a.css",
-    "main.js": "/static/js/main.a223ab15.js",
+    "main.css": "/static/css/main.a4a70705.css",
+    "main.js": "/static/js/main.460ab825.js",
+    "static/media/nin3.png": "/static/media/nin3.9f441013e44c82da5a7d.png",
+    "static/media/nin2.png": "/static/media/nin2.153ba1d0d11bf3aec2b5.png",
+    "static/media/fg.png": "/static/media/fg.c868c34409bc1ad887a8.png",
+    "static/media/nin1.jpeg": "/static/media/nin1.4e37eb6fd82b53f1a5e8.jpeg",
+    "static/media/firs.jpeg": "/static/media/firs.27782bb0a92f5c5345aa.jpeg",
+    "static/media/nimc_logo.png": "/static/media/nimc_logo.aebb2df66d4dcf58e577.png",
+    "static/media/youtube.svg": "/static/media/youtube.0ce1286f38211cecbcf6bd994796164b.svg",
+    "static/media/insta.svg": "/static/media/insta.8ff7ce92ad753b591ed4c1d03e84c026.svg",
+    "static/media/twitter.svg": "/static/media/twitter.fe06d572bd13680e66f4d31fc7cf1832.svg",
     "index.html": "/index.html",
-    "main.bac16d7a.css.map": "/static/css/main.bac16d7a.css.map",
-    "main.a223ab15.js.map": "/static/js/main.a223ab15.js.map"
+    "static/media/facebook.svg": "/static/media/facebook.5e1cb4b86ac3f872dadcbde3ed31cd4b.svg",
+    "main.a4a70705.css.map": "/static/css/main.a4a70705.css.map",
+    "main.460ab825.js.map": "/static/js/main.460ab825.js.map"
   },
   "entrypoints": [
-    "static/css/main.bac16d7a.css",
-    "static/js/main.a223ab15.js"
+    "static/css/main.a4a70705.css",
+    "static/js/main.460ab825.js"
   ]
 }

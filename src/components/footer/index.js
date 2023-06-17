@@ -108,7 +108,7 @@ export default function Footer() {
               {" "}
               <Image src={twit} width="50px" />
             </a>
-            
+
           </div>
         </Col>
 
@@ -121,13 +121,13 @@ export default function Footer() {
               </li>
 
               <li>
-                <Link to="/gallery">
+                <Link to="/dashboard">
                   {" "}
                   ENROLLMENT DASHBOARD
                 </Link>
               </li>
               <li>
-                <Link to="/entertainer">
+                <Link to="/login">
                   {" "}
                   STAFF LOGIN
                 </Link>
@@ -139,7 +139,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/ticket">
+                <Link to="/id">
                   <Button> GENERATE ID </Button>
                 </Link>
               </li>
