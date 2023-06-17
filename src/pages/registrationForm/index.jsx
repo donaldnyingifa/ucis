@@ -7,30 +7,6 @@ const RegistrationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // try {
-    //   // Create a new user in Firebase Authentication
-    //   const { user } = await auth.createUserWithEmailAndPassword(
-    //     `${name}@example.com`,
-    //     "password"
-    //   );
-
-    //   // Store additional user information in Firestore
-    //   await firestore.collection("users").doc(user.uid).set({
-    //     name,
-    //     dateOfBirth,
-    //   });
-
-    //   // Clear form inputs
-    //   setName("");
-    //   setDateOfBirth("");
-
-    //   // Display success message
-    //   alert("Registration successful!");
-    // } catch (error) {
-    //   console.error(error);
-    //   alert("Registration failed. Please try again.");
-    // }
   };
 
   return (

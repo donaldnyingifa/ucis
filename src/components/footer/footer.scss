@@ -1,0 +1,43 @@
+.footer-text {
+  width: 100%;
+  text-align: center;
+  padding-left: 10vw;
+  color: #7c7c7c;
+  background-color: #242222;
+  font-size: larger;
+}
+
+.footer {
+  background-color: #efefef;
+  overflow-x: hidden;
+}
+
+.fu {
+  padding-top: 20px;
+}
+
+.fm {
+  text-decoration: none;
+  padding-left: 30px;
+  padding-top: 30px;
+  padding-right: 30px;
+  list-style-type: none;
+
+  ul > li {
+    list-style-type: none;
+    margin: 5px;
+    padding: 5px;
+  }
+  
+  ul > li > a {
+    font-family: "Montserrat", sans-serif;
+    text-decoration: none;
+    text-align: center;
+    /* font-size: 1.5rem; */
+    font-weight: 500;
+    color: rgb(17, 17, 17);
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+}

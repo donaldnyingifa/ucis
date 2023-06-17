@@ -1,0 +1,12 @@
+.header {
+  li {
+    text-decoration: none;
+    color: black;
+    a {
+      color: black;
+      &:hover {
+        color: grey;
+      }
+    }
+  }
+}

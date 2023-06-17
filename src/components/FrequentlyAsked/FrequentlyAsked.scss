@@ -1,0 +1,27 @@
+.faq {
+  margin-bottom: 10px;
+  cursor: pointer;
+
+  .question {
+    background-color: #f6f6f6;
+    padding: 20px;
+    font-weight: bold;
+  }
+
+  .answer {
+    border-left: 2px solid #e7e7e7;
+    display: none;
+    margin-top: 5px;
+    margin-left: 20px;
+    padding-left: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    transition: height 0.3s;
+  }
+
+  &.open {
+    .answer {
+      display: block;
+    }
+  }
+}
