@@ -1,6 +1,14 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getDatabase, ref, set, onValue, child, get, push, update } from "firebase/database";
+import {
+  signOut
+} from "firebase/auth";
+import {
+  sendPasswordResetEmail
+} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+// import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -9,6 +17,7 @@ import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
   apiKey: "AIzaSyDAr6fyZSvaYOBpLGls2nro5gCMsUvbF-g",
   authDomain: "ucis-1f265.firebaseapp.com",
+  databaseURL: "https://ucis-1f265-default-rtdb.europe-west1.firebasedatabase.app/",
   projectId: "ucis-1f265",
   storageBucket: "ucis-1f265.appspot.com",
   messagingSenderId: "1082840930201",
@@ -17,6 +26,24 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-// eslint-disable-next-line no-unused-vars
-const analytics = getAnalytics(app);
+export const app = initializeApp(firebaseConfig);
+// const analytics = getAnalytics(app);
+// const db = getFirestore(app)
+
+// Initialize Firebase Authentication and get a reference to the service
+export const auth = getAuth(app);
+export const authState = onAuthStateChanged
+export const createUser = createUserWithEmailAndPassword
+export const signIn = signInWithEmailAndPassword
+export const signout = () => signOut(auth)
+const resetPassword = email => sendPasswordResetEmail(auth, email)
+
+// Initialize Realtime Database and get a reference to the service
+export const database = getDatabase(app);
+export {ref, set, onValue, child, get, push, update}
+
+
+// match /note/{noteId} {
+//   allow write: if request.auth != null;
+//   allow read: if request.auth.uid == resource.data.author;
+// }

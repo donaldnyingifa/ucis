@@ -105,7 +105,7 @@ function calculateAge(dateOfBirth) {
                   <td data-th="Name">{person.name}</td>
                   <td data-th="Gender">{person.gender}</td>
                   <td data-th="Age">{calculateAge(person.dob)}</td>
-                  <td data-th="Income">{person.income}</td>
+                  <td data-th="Income">₦ {person.income}</td>
                   <td>
                     <Button
                       className="view-button"
