@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { Button } from '@mui/material';
-import { signout } from '../../firebase';
+import { signOut, auth } from '../../firebase';
 import { UserContext } from "../../UserContext";
 import Image from "react-bootstrap/Image";
 import logo from '../../images/nimc_logo.png';
@@ -11,14 +11,21 @@ import Navbar from 'react-bootstrap/Navbar';
 import './header.scss';
 
 function Header() {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   function handleLogout() {
-    signout()
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      setUser('');
+    }).catch((error) => {
+      // An error happened.
+      console.log('err', error);
+    });
+    // navigate('/');
   }
 
   return (

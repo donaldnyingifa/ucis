@@ -1,13 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, onValue, child, get, push, update } from "firebase/database";
-import {
-  signOut
-} from "firebase/auth";
-import {
-  sendPasswordResetEmail
-} from "firebase/auth";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getAuth,signOut, sendPasswordResetEmail, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 // import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -35,12 +29,11 @@ export const auth = getAuth(app);
 export const authState = onAuthStateChanged
 export const createUser = createUserWithEmailAndPassword
 export const signIn = signInWithEmailAndPassword
-export const signout = () => signOut(auth)
 const resetPassword = email => sendPasswordResetEmail(auth, email)
 
 // Initialize Realtime Database and get a reference to the service
 export const database = getDatabase(app);
-export {ref, set, onValue, child, get, push, update}
+export {ref,signOut, set, onValue, child, get, push, update}
 
 
 // match /note/{noteId} {

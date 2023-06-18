@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom"; // Import useHistory from react-router-dom
 import { UserContext } from "../../UserContext";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
@@ -7,6 +8,8 @@ import { TextField } from "@mui/material";
 import "./login.scss";
 
 function Login() {
+    const [loading, setLoading] = useState(false)
+    const navigate = useNavigate();
     const { signInUser, user } = useContext(UserContext); // Access signInUser from the UserContext
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -18,8 +21,7 @@ function Login() {
     }, []);
 
     const handleSignIn = () => {
-        console.log("Email:", email);
-        console.log("Password:", password);
+        setLoading(true)
         setErr('');
         // Add your logic to handle the sign-in process or API calls here
 
@@ -28,9 +30,12 @@ function Login() {
                 // Signed in
                 const user = userCredential.user;
                 signInUser(user);
-                console.log(user);
+                setLoading(false);
+                navigate("/");
+                // window.location.href = '/'
             })
             .catch((error) => {
+                setLoading(false);
                 const errorMessage = error.message;
                 setErr(errorMessage);
             });
@@ -74,7 +79,10 @@ function Login() {
                         user?.email && <h3>Already Logged In</h3>
                     }
                     {
-                        !user?.email && <button  onClick={handleSignIn}>SignIn</button>
+                        loading && (<><div className='center-div'>loading...</div> <br /></>)
+                    }
+                    {
+                        !user?.email && <button disabled={loading}  onClick={handleSignIn}>SignIn</button>
                     }
                     
                 </div>
