@@ -1,12 +1,19 @@
-.header {
-  color: black;
-  li {
-    text-decoration: none;
+.bg-body-tertiary {
+  background-color: red;
+  padding-top: 0;
+  margin-top: 0;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  .header {
     color: black;
-    a {
+    li {
+      text-decoration: none;
       color: black;
-      &:hover {
-        color: grey;
+      a {
+        color: black;
+        &:hover {
+          color: grey;
+        }
       }
     }
   }

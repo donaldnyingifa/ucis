@@ -1,16 +1,19 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const signInUser = (userData) => {
-    setUser(userData);
-  };
+  useEffect(() => {
+    const storedUser = localStorage.getItem("ucisUser");
+    if (storedUser) {
+      setUser(storedUser);
+    }
+  }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser, signInUser }}>
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );

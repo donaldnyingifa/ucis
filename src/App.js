@@ -6,11 +6,14 @@ import Login from "./pages/login";
 import FAQ from "./pages/faq";
 import Dashboard from "./pages/dashboard";
 import Register from "./pages/register";
+import Header from "./components/header";
+import Footer from "./components/footer";
 
 const App = () => {
     return (
       <UserProvider>
         <BrowserRouter>
+        <Header />
             <Routes>
                 <Route exact path='/' element={<Home />} />
                 <Route exact path='/login' element={<Login />} />
@@ -18,6 +21,7 @@ const App = () => {
                 <Route exact path='/faq' element={<FAQ />} />
                 <Route exact path='/register' element={<Register />} />
             </Routes>
+            <Footer />
         </BrowserRouter>
         </UserProvider>
     );

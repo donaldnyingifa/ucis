@@ -1,7 +1,5 @@
 import React, {useEffect} from 'react'
 import FrequentlyAsked from '../../components/FrequentlyAsked'
-import Header from '../../components/header'
-import Footer from '../../components/footer'
 import './faq.scss'
 
 function FAQ() {
@@ -10,7 +8,6 @@ function FAQ() {
 }, []);
   return (
     <>
-      <Header />
       <div className='faq-page'>
         <FrequentlyAsked
           question="What is NIMC (National Identity Management Commission)?"
@@ -50,8 +47,6 @@ function FAQ() {
           answer="Upon successful enrolment, a Transaction Slip is issued. The applicant is informed when to come for collection of his/her NIN. A second slip called the National Identification Number (NIN) Slip is issued when the applicant returns to collect his/her NIN. The NIN Slip has your 11 Digit Number at the top left corner, second row. This is the slip that contains the NIN and is valid for all legitimate transactions in Nigeria."
         />
       </div>
-
-      <Footer />
     </>
   )
 }

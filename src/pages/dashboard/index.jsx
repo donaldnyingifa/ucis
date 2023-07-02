@@ -2,8 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import * as echarts from "echarts";
 import { database, ref, child, get } from "../../firebase";
 import { Row, Col } from "react-bootstrap";
-import Header from "../../components/header";
-import Footer from "../../components/footer";
 import Table from "../../components/table";
 import "./dashboard.scss";
 
@@ -173,7 +171,6 @@ function Dashboard() {
 
     return (
         <>
-            <Header />
             <div className='dashboard-wrapper'>
                 <Row>
                     <Col>
@@ -193,7 +190,6 @@ function Dashboard() {
                     </Col>
                 </Row>
             </div>
-            <Footer />
         </>
     );
 }

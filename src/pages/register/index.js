@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { database, ref, push, set } from '../../firebase';
 import { TextField } from "@mui/material";
-import Header from '../../components/header';
-import Footer from '../../components/footer';
 import './register.scss';
 
 function Register() {
@@ -64,8 +62,6 @@ function Register() {
 
   return (
     <>
-      <Header />
-
       <div className="register-wrapper">
         <h1 className="center-div">Register</h1>
         <div className="center-div">
@@ -138,7 +134,6 @@ function Register() {
           <button onClick={handleRegister}>Register</button>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

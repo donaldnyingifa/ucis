@@ -1,23 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.ace64250.css",
-    "main.js": "/static/js/main.b594c177.js",
-    "static/media/nin3.png": "/static/media/nin3.9f441013e44c82da5a7d.png",
-    "static/media/nin2.png": "/static/media/nin2.153ba1d0d11bf3aec2b5.png",
+    "main.css": "/static/css/main.404d2ca2.css",
+    "main.js": "/static/js/main.c964f5bb.js",
     "static/media/fg.png": "/static/media/fg.c868c34409bc1ad887a8.png",
-    "static/media/nin1.jpeg": "/static/media/nin1.4e37eb6fd82b53f1a5e8.jpeg",
-    "static/media/firs.jpeg": "/static/media/firs.27782bb0a92f5c5345aa.jpeg",
-    "static/media/nimc_logo.png": "/static/media/nimc_logo.aebb2df66d4dcf58e577.png",
+    "static/media/default.svg": "/static/media/default.7b74116a290029a7dc914a23cb7544e6.svg",
     "static/media/youtube.svg": "/static/media/youtube.0ce1286f38211cecbcf6bd994796164b.svg",
     "static/media/insta.svg": "/static/media/insta.8ff7ce92ad753b591ed4c1d03e84c026.svg",
     "static/media/twitter.svg": "/static/media/twitter.fe06d572bd13680e66f4d31fc7cf1832.svg",
     "index.html": "/index.html",
     "static/media/facebook.svg": "/static/media/facebook.5e1cb4b86ac3f872dadcbde3ed31cd4b.svg",
-    "main.ace64250.css.map": "/static/css/main.ace64250.css.map",
-    "main.b594c177.js.map": "/static/js/main.b594c177.js.map"
+    "main.404d2ca2.css.map": "/static/css/main.404d2ca2.css.map",
+    "main.c964f5bb.js.map": "/static/js/main.c964f5bb.js.map"
   },
   "entrypoints": [
-    "static/css/main.ace64250.css",
-    "static/js/main.b594c177.js"
+    "static/css/main.404d2ca2.css",
+    "static/js/main.c964f5bb.js"
   ]
 }

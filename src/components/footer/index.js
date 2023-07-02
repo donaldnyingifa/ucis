@@ -18,15 +18,15 @@ export default function Footer() {
   const emailRef = useRef();
   const { user } = useContext(UserContext);
 
-
   let [loading, setLoading] = useState(false);
   let [err, setErr] = useState("");
-  // const [user, setUser] = useState();
 
   useEffect(() => {
     window.scrollTo(0, 0);
 
   }, []);
+
+  const isLoggedIn = user !== null && user !== 'null' && user.length > 2;
 
   function handleJoin(e) {
     e.preventDefault();
@@ -128,16 +128,16 @@ export default function Footer() {
               <li>
                 <Link to="/"> HOME</Link>
               </li>
-              {
+              {/* {
                 !user?.email && (
                   <li>
                     <Link to="/login">
                       {" "}
-                      STAFF LOGIN
+                      ADMIN LOGIN
                     </Link>
                   </li>
                 )
-              }
+              } */}
 
               <li>
                 <Link to="/faq">
@@ -146,7 +146,7 @@ export default function Footer() {
                 </Link>
               </li>
               {
-                user?.email && (
+                isLoggedIn && (
                   <>
                     <li>
                       <Link to="/dashboard">
