@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { generateSocialSecurityNumber } from '../../utils';
 import { database, ref, push, set } from '../../firebase';
-import { TextField } from "@mui/material";
+import { TextField, InputLabel, } from '@mui/material';
 import './register.scss';
 
 function Register() {
@@ -9,13 +10,17 @@ function Register() {
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [gender, setGender] = useState('');
   const [income, setIncome] = useState('');
+  const [stateOfOrigin, setStateOfOrigin] = useState('');
+
 
   const [err, setErr] = useState('');
 
   function writeUserData(name, email, dateOfBirth, gender, income) {
 
-    const newUserRef = push(ref(database, 'registeredUsers/'));
-    const userId = newUserRef.key; // Get the auto-generated ID
+    // const newUserRef = push(ref(database, 'registeredUsers/'));
+    // const userId = newUserRef.key; // Get the auto-generated ID
+
+    const userId = generateSocialSecurityNumber();
 
     set(ref(database, 'registeredUsers/' + userId), {
       id: userId,
@@ -24,6 +29,7 @@ function Register() {
       dob: dateOfBirth,
       gender,
       income,
+      stateOfOrigin,
     });
   }
 
@@ -41,13 +47,11 @@ function Register() {
       income,
     };
 
-    // console.log(formData);
-
     // Add your logic to handle the registration process or API calls here
 
     try {
       writeUserData(formData.name, formData.email, formData.dateOfBirth, formData.gender, formData.income);
-      setErr("User added succeccfully");
+      setErr("User added successfully");
     } catch (err) {
       setErr(err)
     }
@@ -87,17 +91,20 @@ function Register() {
         </div>
         <br />
         <div className="center-div">
+          <InputLabel htmlFor="dateOfBirth" style={{ paddingRight: '10px' }}>Date of Birth </InputLabel>
           <input
             id='dateOfBirth'
             type="date"
             label='Date of Birth'
             variant='standard'
             value={dateOfBirth}
+            style={{ width: "30%" }}
             onChange={(e) => setDateOfBirth(e.target.value)}
           />
         </div>
         <br />
         <div className="center-div">
+          <InputLabel style={{ paddingRight: '10px' }} htmlFor="dateOfBirth">Gender </InputLabel>
           {genderOptions.map((option) => (
             <label key={option.value} className="radio-label">
               <input
@@ -111,6 +118,19 @@ function Register() {
             </label>
           ))}
         </div>
+        <br />
+        <div className="center-div">
+          <TextField
+            id='stateOfOrigin'
+            type="text"
+            label='State of Origin'
+            variant='standard'
+            value={stateOfOrigin}
+            onChange={(e) => setStateOfOrigin(e.target.value)}
+          />
+        </div>
+
+
         <br />
         <div className="center-div">
           <TextField

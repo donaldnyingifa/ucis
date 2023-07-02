@@ -3,14 +3,8 @@ import * as echarts from "echarts";
 import { database, ref, child, get } from "../../firebase";
 import { Row, Col } from "react-bootstrap";
 import Table from "../../components/table";
+import { convertObjectToArray } from "../../utils";
 import "./dashboard.scss";
-
-function convertObjectToArray(object) {
-    return Object.keys(object).map((id) => {
-        const item = object[id];
-        return { id, ...item };
-    });
-}
 
 function Dashboard() {
     const [initialData, setinitialData] = useState([]);
@@ -37,7 +31,7 @@ function Dashboard() {
     const searchName = (searchValue) => {
         if (searchValue.length > 0) {
             const filtered = initialData.filter((person) =>
-                person.name.toLowerCase().includes(searchValue.toLowerCase()),
+                person.name.toLowerCase().includes(searchValue.toLowerCase()) || person.id.includes(searchValue) ,
             );
             setFilteredData(filtered);
         } else {
@@ -46,10 +40,18 @@ function Dashboard() {
     };
 
     // Calculate the average income
-    const totalIncome = initialData.reduce(
-        (sum, person) => sum + parseFloat(person.income.replace("₦", "").replace(",", "")),
-        0,
-    );
+    const totalIncome = initialData.reduce((sum, person) => {
+        const incomeValue = person?.income?.replace("₦", "").replace(",", "");
+        const parsedIncome = parseFloat(incomeValue);
+      
+        // Check if income is undefined or NaN
+        if (incomeValue === undefined || isNaN(parsedIncome)) {
+          return sum;
+        }
+      
+        return sum + parsedIncome;
+      }, 0);
+      
     const averageIncome = totalIncome / initialData.length;
     const formattedAverageIncome = averageIncome.toLocaleString("en-NG", {
         style: "currency",

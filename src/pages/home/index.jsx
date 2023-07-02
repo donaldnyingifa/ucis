@@ -10,6 +10,7 @@ function Home() {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+    console.log(user);
 
     const isLoggedIn = user !== null && user !== "null" && user.length > 2;
     return (
@@ -46,10 +47,11 @@ function Home() {
                                     <Link to='/dashboard'>
                                         <Button>DASHBOARD </Button>
                                     </Link>
-
-                                    <Link to='/register'>
-                                        <Button> REGISTER USER </Button>
-                                    </Link>
+                                    {user === "NIMC" && (
+                                        <Link to='/register'>
+                                            <Button> REGISTER USER </Button>
+                                        </Link>
+                                    )}
                                 </>
                             )}
                         </div>

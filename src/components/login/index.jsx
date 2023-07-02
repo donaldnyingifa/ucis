@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { InfinitySpin } from "react-loader-spinner";
 import { UserContext } from "../../UserContext";
 import { signIn, auth } from "../../firebase";
 import { TextField } from "@mui/material";
@@ -13,16 +14,16 @@ function LoginComponent({ userName }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [err, setErr] = useState("");
-    const isLoggedIn = user !== null && user !== 'null' && user.length > 2;
+    const isLoggedIn = user !== null && user !== "null" && user.length > 2;
 
     const handleSignIn = () => {
         setLoading(true);
         setErr("");
 
         if (!checkEmailContains(email, userName)) {
-            setErr('Not Authorized to login to this Organization');
+            setErr("Not Authorized to login to this Organization");
             setLoading(false);
-            return
+            return;
         }
 
         signIn(auth, email, password)
@@ -31,7 +32,7 @@ function LoginComponent({ userName }) {
                 let org = null;
                 if (user.email) org = userName;
                 setUser(org);
-                await localStorage.setItem("ucisUser", user?.email);
+                await localStorage.setItem("ucisUser", org);
                 setLoading(false);
                 navigate("/");
             })
@@ -41,7 +42,7 @@ function LoginComponent({ userName }) {
                 setErr(errorMessage);
             });
     };
-    console.log(user)
+    console.log(user);
 
     return (
         <>
@@ -78,13 +79,18 @@ function LoginComponent({ userName }) {
                         <p>{err}</p>
                     </div>
                 )}
+                {loading && (
+                        <div className='center-div'>
+                            <InfinitySpin type='ThreeDots' color='#000' />
+                        </div>
+                    )}
                 <br />
                 <div className='center-div'>
                     {isLoggedIn && <h3>Already Logged In</h3>}
-
+                    
                     {!isLoggedIn && (
                         <button disabled={loading} onClick={handleSignIn}>
-                            {loading ? "loading..." : " SignIn"}
+                            {loading ? "loading" : " SignIn"}
                         </button>
                     )}
                 </div>

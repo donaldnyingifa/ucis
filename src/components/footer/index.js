@@ -150,15 +150,19 @@ export default function Footer() {
                   <>
                     <li>
                       <Link to="/dashboard">
-                        {" "}
                         ENROLLMENT DASHBOARD
                       </Link>
                     </li>
-                    <li>
-                      <Link to="/register">
-                        <Button> REGISTER USER </Button>
-                      </Link>
-                    </li>
+                    {
+                      user === 'NIMC' && (
+                        <li>
+                          <Link to="/register">
+                            <Button> REGISTER USER </Button>
+                          </Link>
+                        </li>
+                      )
+                    }
+
                   </>
                 )
               }

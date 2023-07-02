@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
 import Login from "./pages/login";
 import FAQ from "./pages/faq";
+import User from "./pages/user";
 import Dashboard from "./pages/dashboard";
 import Register from "./pages/register";
 import Header from "./components/header";
@@ -17,6 +18,7 @@ const App = () => {
             <Routes>
                 <Route exact path='/' element={<Home />} />
                 <Route exact path='/login' element={<Login />} />
+                <Route exact path='/user' element={<User />} />
                 <Route exact path='/dashboard' element={<Dashboard />} />
                 <Route exact path='/faq' element={<FAQ />} />
                 <Route exact path='/register' element={<Register />} />

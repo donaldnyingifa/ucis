@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { TextField, Button } from "@mui/material";
 import "./table.scss";
 
@@ -62,7 +63,7 @@ function calculateAge(dateOfBirth) {
           <TextField
             id="text"
             type="text"
-            label="Search Name"
+            label="Search Name or ID"
             variant="standard"
             value={searchValue}
             onChange={handleChange}
@@ -72,6 +73,12 @@ function calculateAge(dateOfBirth) {
         <table className="rwd-table">
           <thead>
             <tr>
+            <th
+                onClick={() => handleSort("id")}
+                className={sortConfig.key === "id" ? `sorted ${sortConfig.direction}` : ""}
+              >
+                ID
+              </th>
               <th
                 onClick={() => handleSort("name")}
                 className={sortConfig.key === "name" ? `sorted ${sortConfig.direction}` : ""}
@@ -100,26 +107,32 @@ function calculateAge(dateOfBirth) {
           </thead>
           {sortedData.length > 0 && (
             <tbody>
-              {sortedData.map((person, index) => (
-                <tr key={index}>
-                  <td data-th="Name">{person.name}</td>
-                  <td data-th="Gender">{person.gender}</td>
-                  <td data-th="Age">{calculateAge(person.dob)}</td>
-                  <td data-th="Income">₦ {person.income}</td>
-                  <td>
-                    <Button
-                      className="view-button"
-                      style={{
-                        backgroundColor: "grey",
-                        borderColor: "grey",
-                        color: "#fff",
-                      }}
-                    >
-                      View
-                    </Button>
-                  </td>
-                </tr>
-              ))}
+              {sortedData.map((person, index) => {
+                return (
+                  <tr key={index}>
+                     <td data-th="ID">{person.id}</td>
+                    <td data-th="Name">{person.name}</td>
+                    <td data-th="Gender">{person.gender}</td>
+                    <td data-th="Age">{calculateAge(person.dob)}</td>
+                    <td data-th="Income">₦ {person.income || 0}</td>
+                    <td>
+                      
+                      <Link to={{ pathname: "/user", search: `?name=${JSON.stringify(sortedData[index])}` }}>
+                      <Button
+                        className="view-button"
+                        style={{
+                          backgroundColor: "grey",
+                          borderColor: "grey",
+                          color: "#fff",
+                        }}
+                      >
+                        View
+                      </Button>
+                            </Link>
+                    </td>
+                  </tr>
+                )
+              })}
             </tbody>
           )}
         </table>

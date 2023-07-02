@@ -21,10 +21,10 @@ function Header() {
   const handleLogout = () => {
     setUser(null);
     localStorage.setItem("ucisUser", null);
-    navigate("/"); 
+    navigate("/");
   };
 
-  const isLoggedIn = user !== null && user !== 'null'  && user.length > 2;
+  const isLoggedIn = user !== null && user !== 'null' && user.length > 2;
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -38,22 +38,24 @@ function Header() {
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav>
             <ul className="header">
-               
-                  {/* <li>
-                    <Link to={{ pathname: "/login", search: "?name=Admin" }}>ADMIN LOGIN</Link>
-                  </li> */}
-                  <li>
-                    <Link to="/faq">FAQ</Link>
-                  </li>
-               
               {isLoggedIn && (
-               
-                  <><li>{user}</li><li>
-                  <Button variant="warning" onClick={handleLogout}>
-                    LOGOUT
-                  </Button>
-                </li></>
+
+                <>
+                  <li>
+                    <Link to="/dashboard">
+                      DASHBOARD
+                    </Link>
+                  </li>
+                  <li>{user}</li>
+                  <li>
+                    <Button variant="warning" onClick={handleLogout}>
+                      LOGOUT
+                    </Button>
+                  </li></>
               )}
+              <li>
+                <Link to="/faq">FAQ</Link>
+              </li>
             </ul>
           </Nav>
         </Navbar.Collapse>
