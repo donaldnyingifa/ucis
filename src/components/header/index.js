@@ -46,7 +46,10 @@ function Header() {
                       DASHBOARD
                     </Link>
                   </li>
-                  <li>{user}</li>
+                  {/* <li style={{color:'#000'}}><h5>{user}</h5></li> */}
+                  <li className="animated infinite">
+                <h5 style={{ color: '#000' }}>{user}</h5>
+              </li>
                   <li>
                     <Button variant="warning" onClick={handleLogout}>
                       LOGOUT

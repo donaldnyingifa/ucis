@@ -43,7 +43,7 @@ function Home() {
                             )}
 
                             {isLoggedIn && (
-                                <>
+                                <div className="dash">
                                     <Link to='/dashboard'>
                                         <Button>DASHBOARD </Button>
                                     </Link>
@@ -52,7 +52,7 @@ function Home() {
                                             <Button> REGISTER USER </Button>
                                         </Link>
                                     )}
-                                </>
+                                </div>
                             )}
                         </div>
                     </Col>

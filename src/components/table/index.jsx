@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { TextField, Button } from "@mui/material";
 import "./table.scss";
 
@@ -21,6 +21,8 @@ function calculateAge(dateOfBirth) {
   }
 
   function Table({ data, searchName }) {
+    console.log(data)
+    const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState("");
     const [sortConfig, setSortConfig] = useState({ key: null, direction: "" });
   
@@ -28,6 +30,12 @@ function calculateAge(dateOfBirth) {
       const value = event.target.value;
       setSearchValue(value);
       searchName(value);
+    };
+
+    const handleUser = (index) => {
+      navigate('/user', {
+        state: data[index]
+      }); 
     };
   
     const handleSort = (key) => {
@@ -117,8 +125,9 @@ function calculateAge(dateOfBirth) {
                     <td data-th="Income">₦ {person.income || 0}</td>
                     <td>
                       
-                      <Link to={{ pathname: "/user", search: `?name=${JSON.stringify(sortedData[index])}` }}>
+                      {/* <Link to={{ pathname: "/user", search: `?name=${JSON.stringify(sortedData[index])}` }}> */}
                       <Button
+                      onClick={() => handleUser(index)}
                         className="view-button"
                         style={{
                           backgroundColor: "grey",
@@ -128,7 +137,7 @@ function calculateAge(dateOfBirth) {
                       >
                         View
                       </Button>
-                            </Link>
+                            {/* </Link> */}
                     </td>
                   </tr>
                 )

@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
+import { database, ref, set, push } from "../../firebase";
 import { Link } from "react-router-dom";
 import logo2 from "../../images/fg.png";
 import insta from "../../images/social/insta.svg";
@@ -13,6 +14,14 @@ import fb from "../../images/social/facebook.svg";
 import twit from "../../images/social/twitter.svg";
 import { InfinitySpin } from "react-loader-spinner";
 import './footer.scss'
+
+function writeEmailData(email) {
+  const newUserRef = push(ref(database, 'subscribers/'));
+  const userId = newUserRef.key; // Get the auto-generated ID
+  set(ref(database, 'subscribers/' + userId), {
+    email: email,
+  });
+}
 
 export default function Footer() {
   const emailRef = useRef();
@@ -28,43 +37,44 @@ export default function Footer() {
 
   const isLoggedIn = user !== null && user !== 'null' && user.length > 2;
 
+  // function handleJoin(e) {
+  //   e.preventDefault();
+  //   if (emailRef.current.value.length < 5) {
+  //     setErr(
+  //       (err = "Please enter a valid email ")
+  //     );
+  //     return;
+  //   }
+  //   setLoading(true);
+  //   try {
+  //     writeEmailData(emailRef.current.value);
+  //   } catch (e) {
+  //     setErr(e);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+
+  // }
+
   function handleJoin(e) {
     e.preventDefault();
     if (emailRef.current.value.length < 5) {
-      setErr(
-        (err = "Please enter a valid email ")
-      );
+      setErr("Please enter a valid email");
       return;
     }
     setLoading(true);
-
-    // const l = "http://localhost:5001/bomchi-39029/us-central1/app/api/email";
-    const s =
-      "https://us-central1-bomchi-39029.cloudfunctions.net/app/api/email";
-    fetch(s, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: emailRef.current.value,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setErr(
-          (err = "Thanks for signing up 😬")
-        );
-        // use => this.email.current.value, ref={this.email} instead of dom
-        document.getElementById("email").reset();
-        setLoading(false);
-      })
-      .catch((err) => {
-        setLoading((loading = false));
-        console.log(err);
-      });
+    try {
+      writeEmailData(emailRef.current.value);
+      emailRef.current.value = ""; // Clear the input field
+      setErr("Thank you for subscribing!"); // Add a message to thank the user
+    } catch (e) {
+      setErr(e);
+    } finally {
+      setLoading(false);
+    }
   }
+
+  
   return (
     <>
       <Row className="footer">
@@ -150,7 +160,7 @@ export default function Footer() {
                   <>
                     <li>
                       <Link to="/dashboard">
-                        ENROLLMENT DASHBOARD
+                        DASHBOARD
                       </Link>
                     </li>
                     {

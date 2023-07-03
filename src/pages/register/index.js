@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import { generateSocialSecurityNumber } from '../../utils';
-import { database, ref, push, set } from '../../firebase';
-import { TextField, InputLabel, } from '@mui/material';
+import { database, ref, set } from '../../firebase';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import './register.scss';
 
 function Register() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+}, []);
+const navigate = useNavigate();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [gender, setGender] = useState('');
   const [income, setIncome] = useState('');
   const [stateOfOrigin, setStateOfOrigin] = useState('');
-
-
   const [err, setErr] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  function writeUserData(name, email, dateOfBirth, gender, income) {
-
-    // const newUserRef = push(ref(database, 'registeredUsers/'));
-    // const userId = newUserRef.key; // Get the auto-generated ID
-
+  function writeUserData(name, email, dateOfBirth, gender, income, stateOfOrigin) {
     const userId = generateSocialSecurityNumber();
 
     set(ref(database, 'registeredUsers/' + userId), {
@@ -38,121 +38,156 @@ function Register() {
     { label: 'Female', value: 'female' },
   ];
 
-  const handleRegister = () => {
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
     const formData = {
       name,
       email,
       dateOfBirth,
       gender,
       income,
+      stateOfOrigin,
     };
 
-    // Add your logic to handle the registration process or API calls here
-
     try {
-      writeUserData(formData.name, formData.email, formData.dateOfBirth, formData.gender, formData.income);
-      setErr("User added successfully");
+
+      writeUserData(
+        formData.name,
+        formData.email,
+        formData.dateOfBirth,
+        formData.gender,
+        formData.income,
+        formData.stateOfOrigin
+      );
+
+      setErr('User added successfully');
+      setTimeout(()=>{
+        navigate("/dashboard");
+      }, 2000)
     } catch (err) {
-      setErr(err)
+      setErr(err);
+    } finally {
+      setIsLoading(false);
     }
 
-    // Clear the form fields after registration
     setName('');
     setEmail('');
     setDateOfBirth('');
     setGender('');
     setIncome('');
+    setStateOfOrigin('');
   };
 
   return (
     <>
       <div className="register-wrapper">
         <h1 className="center-div">Register</h1>
-        <div className="center-div">
-          <TextField
-            id='name'
-            type="text"
-            label='Name'
-            variant='standard'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <br />
-        <div className="center-div">
-          <TextField
-            id='email'
-            type="email"
-            label='Email'
-            variant='standard'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <br />
-        <div className="center-div">
-          <InputLabel htmlFor="dateOfBirth" style={{ paddingRight: '10px' }}>Date of Birth </InputLabel>
-          <input
-            id='dateOfBirth'
-            type="date"
-            label='Date of Birth'
-            variant='standard'
-            value={dateOfBirth}
-            style={{ width: "30%" }}
-            onChange={(e) => setDateOfBirth(e.target.value)}
-          />
-        </div>
-        <br />
-        <div className="center-div">
-          <InputLabel style={{ paddingRight: '10px' }} htmlFor="dateOfBirth">Gender </InputLabel>
-          {genderOptions.map((option) => (
-            <label key={option.value} className="radio-label">
-              <input
-                type="radio"
-                name="gender"
-                value={option.value}
-                checked={gender === option.value}
-                onChange={(e) => setGender(e.target.value)}
+        <Form onSubmit={handleRegister}>
+          <Form.Group as={Row} controlId="name">
+            <Form.Label column sm={2}>
+              Name
+            </Form.Label>
+            <Col sm={10}>
+              <Form.Control
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
               />
-              {option.label}
-            </label>
-          ))}
-        </div>
-        <br />
-        <div className="center-div">
-          <TextField
-            id='stateOfOrigin'
-            type="text"
-            label='State of Origin'
-            variant='standard'
-            value={stateOfOrigin}
-            onChange={(e) => setStateOfOrigin(e.target.value)}
-          />
-        </div>
+            </Col>
+          </Form.Group>
 
+          <Form.Group as={Row} controlId="email">
+            <Form.Label column sm={2}>
+              Email
+            </Form.Label>
+            <Col sm={10}>
+              <Form.Control
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </Col>
+          </Form.Group>
 
-        <br />
-        <div className="center-div">
-          <TextField
-            id='income'
-            type="text"
-            label='Income'
-            variant='standard'
-            value={income}
-            onChange={(e) => setIncome(e.target.value)}
-          />
-        </div>
-        <br />
-        {
-          err && (
+          <Form.Group as={Row} controlId="dateOfBirth">
+            <Form.Label column sm={2}>
+              Date of Birth
+            </Form.Label>
+            <Col sm={10}>
+              <Form.Control
+                type="date"
+                value={dateOfBirth}
+                onChange={(e) => setDateOfBirth(e.target.value)}
+                required
+              />
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row} controlId="gender">
+            <Form.Label column sm={2}>
+              Gender
+            </Form.Label>
+            <Col sm={10}>
+              {genderOptions.map((option) => (
+                <Form.Check
+                  key={option.value}
+                  inline
+                  label={option.label}
+                  type="radio"
+                  name="gender"
+                  value={option.value}
+                  checked={gender === option.value}
+                  onChange={(e) => setGender(e.target.value)}
+                  required
+                />
+              ))}
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row} controlId="stateOfOrigin">
+            <Form.Label column sm={2}>
+              State of Origin
+            </Form.Label>
+            <Col sm={10}>
+              <Form.Control
+                type="text"
+                value={stateOfOrigin}
+                onChange={(e) => setStateOfOrigin(e.target.value)}
+                required
+              />
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row} controlId="income">
+            <Form.Label column sm={2}>
+              Income
+            </Form.Label>
+            <Col sm={10}>
+              <Form.Control
+                type="text"
+                value={income}
+                onChange={(e) => setIncome(e.target.value)}
+                required
+              />
+            </Col>
+          </Form.Group>
+
+          {err && (
             <div className="center-div">
               <p>{err}</p>
             </div>
-          )
-        }
-        <div className="center-div">
-          <button onClick={handleRegister}>Register</button>
-        </div>
+          )}
+
+          <div className="center-div">
+            <Button type="submit" disabled={isLoading}>
+              {isLoading ? 'Loading...' : 'Register'}
+            </Button>
+          </div>
+        </Form>
       </div>
     </>
   );

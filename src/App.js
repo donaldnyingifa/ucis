@@ -7,6 +7,7 @@ import FAQ from "./pages/faq";
 import User from "./pages/user";
 import Dashboard from "./pages/dashboard";
 import Register from "./pages/register";
+import Update from "./pages/update";
 import Header from "./components/header";
 import Footer from "./components/footer";
 
@@ -22,6 +23,7 @@ const App = () => {
                 <Route exact path='/dashboard' element={<Dashboard />} />
                 <Route exact path='/faq' element={<FAQ />} />
                 <Route exact path='/register' element={<Register />} />
+                <Route exact path='/update' element={<Update/>} />
             </Routes>
             <Footer />
         </BrowserRouter>

@@ -1,39 +1,63 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './user.scss';
 
 function User() {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const userDetails = searchParams.get('name');
-  const { dob, email, gender, id, income, name, stateOfOrigin } = JSON.parse(userDetails);
+  const { state } = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleGoBack = () => {
+    navigate('/dashboard');
+  };
+
+  const handleUpdate = () => {
+    navigate('/update', {
+      state: state
+    });
+  };
 
   return (
     <div className="user-container">
-      <h2>{name}'s Data</h2>
+      <h2>{state?.name}'s Data</h2>
       <div>
-      <p>
-          <strong>ID:</strong> {id}
+        <p>
+          <strong>ID:</strong> {state?.id}
         </p>
         <p>
-          <strong>Name:</strong> {name}
+          <strong>Name:</strong> {state?.name}
         </p>
         <p>
-          <strong>Email:</strong> {email}
+          <strong>State of Origin:</strong> {state?.stateOfOrigin}
         </p>
         <p>
-          <strong>Date of Birth:</strong> {dob}
+          <strong>Email:</strong> {state?.email}
         </p>
         <p>
-          <strong>Gender:</strong> {gender}
-        </p>
-        
-        <p>
-          <strong>Income:</strong> ₦ {income || 0}
+          <strong>Date of Birth:</strong> {state?.dob}
         </p>
         <p>
-          <strong>State of Origin:</strong> {stateOfOrigin}
+          <strong>Gender:</strong> {state?.gender}
         </p>
+        <p>
+          <strong>Income:</strong> ₦ {state?.income || 0}
+        </p>
+        <p>
+          <strong>Number of Accounts:</strong> {state?.totalAcc || '--'}
+        </p>
+        <p>
+          <strong>Loan:</strong> ₦ {state?.loan || 0}
+        </p>
+        <p>
+          <strong>Polling Unit:</strong> {state?.pollingUnit || '--'}
+        </p>
+      </div>
+      <div className="button-container">
+        <button onClick={handleGoBack}>Back</button>
+        <button onClick={handleUpdate}>Update</button>
       </div>
     </div>
   );
