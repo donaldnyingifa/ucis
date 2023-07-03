@@ -1,25 +1,26 @@
-
 $breakpoint-alpha: 480px; // adjust to your needs
 
 .rwd-table {
   margin: 1em 0;
   min-width: 300px; // adjust to your needs
-  
+  min-height: 300px;
+
   tr {
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
   }
-  
+
   th {
     display: none; // for accessibility, use a visually hidden method here instead! Thanks, reddit!   
   }
-  
+
   td {
-    display: block; 
-    
+    display: block;
+
     &:first-child {
       padding-top: .5em;
     }
+
     &:last-child {
       padding-bottom: .5em;
     }
@@ -32,32 +33,33 @@ $breakpoint-alpha: 480px; // adjust to your needs
       width: 6.5em; // magic number :( adjust according to your own content
       display: inline-block;
       // end options
-      
+
       @media (min-width: $breakpoint-alpha) {
         display: none;
       }
     }
   }
-  
-  th, td {
+
+  th,
+  td {
     text-align: left;
-    
+
     @media (min-width: $breakpoint-alpha) {
       display: table-cell;
       padding: .25em .5em;
-      
+
       &:first-child {
         padding-left: 0;
       }
-      
+
       &:last-child {
         padding-right: 0;
       }
     }
 
   }
-  
-  
+
+
 }
 
 
@@ -85,16 +87,22 @@ h1 {
   color: #fff;
   border-radius: .4em;
   overflow: hidden;
+
   tr {
     border-color: lighten(#34495E, 10%);
   }
-  th, td {
+
+  th,
+  td {
     margin: .5em 1em;
-    @media (min-width: $breakpoint-alpha) { 
-      padding: 1em !important; 
+
+    @media (min-width: $breakpoint-alpha) {
+      padding: 1em !important;
     }
   }
-  th, td:before {
+
+  th,
+  td:before {
     color: #dd5;
   }
 }
@@ -132,3 +140,22 @@ table.rwd-table th.descending::after {
   border-color: transparent transparent #b5a9a9;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #f2f2f2;
+  border: none;
+  color: #555;
+  padding: 6px 12px;
+  margin: 0 4px;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background-color: #888;
+  color: #fff;
+}
